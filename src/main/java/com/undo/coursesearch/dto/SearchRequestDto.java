@@ -1,11 +1,11 @@
 package com.undo.coursesearch.dto;
 
 import com.undo.coursesearch.document.CourseDocument;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,7 +20,6 @@ public class SearchRequestDto {
     private BigDecimal maxPrice;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime startDate;
 
     private SortType sort = SortType.UPCOMING;

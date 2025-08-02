@@ -1,7 +1,11 @@
 package com.undo.coursesearch.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(indexName = "courses")
+@JsonIgnoreProperties(ignoreUnknown = true) // This will ignore the _class field
 public class CourseDocument {
 
     @Id
@@ -47,8 +52,11 @@ public class CourseDocument {
     @Field(type = FieldType.Double)
     private BigDecimal price;
 
-    @Field(type = FieldType.Date, format = DateFormat.date_time)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    // Updated date field configuration
+    @Field(type = FieldType.Date, format = {}, pattern = "yyyy-MM-dd'T'HH:mm:ss||yyyy-MM-dd'T'HH:mm:ss.SSS||strict_date_optional_time||epoch_millis")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime nextSessionDate;
 
     // For autocomplete suggestions
@@ -63,6 +71,7 @@ public class CourseDocument {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
+    @JsonIgnoreProperties(ignoreUnknown = true) // Also add to nested class
     public static class CompletionSuggest {
         private List<String> input;
         private String output;

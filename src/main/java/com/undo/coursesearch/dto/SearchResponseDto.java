@@ -1,13 +1,13 @@
 package com.undo.coursesearch.dto;
 
 import com.undo.coursesearch.document.CourseDocument;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,7 +38,6 @@ public class SearchResponseDto {
         private Integer maxAge;
         private BigDecimal price;
 
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
         private LocalDateTime nextSessionDate;
 
         public static CourseDto fromDocument(CourseDocument document) {
