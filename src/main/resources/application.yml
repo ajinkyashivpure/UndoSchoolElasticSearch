@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: course-search-engine
+
+  elasticsearch:
+    uris: http://localhost:9200
+    connection-timeout: 10s
+    socket-timeout: 30s
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+logging:
+  level:
+    com.coursemanagement: DEBUG
+    org.springframework.data.elasticsearch: DEBUG
+    co.elastic.clients: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# Custom application properties
+app:
+  elasticsearch:
+    index:
+      courses: courses
+      courses-suggest: courses-suggest
+  data:
+    sample-file: sample-courses.json
