@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(indexName = "courses")
-@JsonIgnoreProperties(ignoreUnknown = true) // This will ignore the _class field
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CourseDocument {
 
     @Id
@@ -43,23 +43,22 @@ public class CourseDocument {
     @Field(type = FieldType.Keyword)
     private String gradeRange;
 
-    @Field(type = FieldType.Integer)
-    private Integer minAge;
+    @Field(type = FieldType.Double)
+    private BigDecimal minAge;
 
-    @Field(type = FieldType.Integer)
-    private Integer maxAge;
+    @Field(type = FieldType.Double)
+    private BigDecimal maxAge;
 
     @Field(type = FieldType.Double)
     private BigDecimal price;
 
-    // Updated date field configuration
     @Field(type = FieldType.Date, format = {}, pattern = "yyyy-MM-dd'T'HH:mm:ss||yyyy-MM-dd'T'HH:mm:ss.SSS||strict_date_optional_time||epoch_millis")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime nextSessionDate;
 
-    // For autocomplete suggestions
+//this one is for auto complete
     @Field(type = FieldType.Search_As_You_Type)
     private String titleSuggest;
 
@@ -71,7 +70,7 @@ public class CourseDocument {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true) // Also add to nested class
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class CompletionSuggest {
         private List<String> input;
         private String output;
@@ -83,7 +82,6 @@ public class CourseDocument {
         COURSE,
         CLUB
     }
-
     // Helper method to create suggest field from title
     public void initializeSuggestFields() {
         this.titleSuggest = this.title;

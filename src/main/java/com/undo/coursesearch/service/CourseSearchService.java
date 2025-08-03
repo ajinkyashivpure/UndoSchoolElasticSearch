@@ -149,7 +149,7 @@ public class CourseSearchService {
             if (request.getMinAge() != null) {
                 RangeQuery minAgeQuery = RangeQuery.of(r -> r
                         .field("maxAge")
-                        .gte((JsonData) FieldValue.of(request.getMinAge()))
+                        .gte(JsonData.of(request.getMinAge()))  // Direct JsonData.of() conversion
                 );
                 ageQueryBuilder.must(minAgeQuery._toQuery());
             }
@@ -157,7 +157,7 @@ public class CourseSearchService {
             if (request.getMaxAge() != null) {
                 RangeQuery maxAgeQuery = RangeQuery.of(r -> r
                         .field("minAge")
-                        .lte((JsonData) FieldValue.of(request.getMaxAge()))
+                        .lte(JsonData.of(request.getMaxAge()))  // Direct JsonData.of() conversion
                 );
                 ageQueryBuilder.must(maxAgeQuery._toQuery());
             }
@@ -184,7 +184,7 @@ public class CourseSearchService {
         if (request.hasDateFilter()) {
             RangeQuery dateQuery = RangeQuery.of(r -> r
                     .field("nextSessionDate")
-                    .gte((JsonData) FieldValue.of(request.getStartDate().toString()))
+                    .gte(JsonData.of( FieldValue.of(request.getStartDate().toString())))
             );
             boolQueryBuilder.filter(dateQuery._toQuery());
         }

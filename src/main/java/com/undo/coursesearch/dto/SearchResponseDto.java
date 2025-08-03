@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,8 +33,8 @@ public class SearchResponseDto {
         private String category;
         private CourseDocument.CourseType type;
         private String gradeRange;
-        private Integer minAge;
-        private Integer maxAge;
+        private BigDecimal minAge;
+        private BigDecimal maxAge;
         private BigDecimal price;
 
         private LocalDateTime nextSessionDate;

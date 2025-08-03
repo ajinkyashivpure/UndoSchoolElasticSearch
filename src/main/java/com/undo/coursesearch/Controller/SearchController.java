@@ -7,12 +7,10 @@ import com.undo.coursesearch.service.CourseSearchService;
 import com.undo.coursesearch.service.DataIndexingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +28,8 @@ public class SearchController {
     @GetMapping("/search")
     public ResponseEntity<SearchResponseDto> searchCourses(
             @RequestParam(required = false) String q,
-            @RequestParam(required = false) Integer minAge,
-            @RequestParam(required = false) Integer maxAge,
+            @RequestParam(required = false) BigDecimal minAge,
+            @RequestParam(required = false) BigDecimal maxAge,
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String type,
             @RequestParam(required = false) BigDecimal minPrice,

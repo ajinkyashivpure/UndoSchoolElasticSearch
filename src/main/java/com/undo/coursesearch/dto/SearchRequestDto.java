@@ -5,15 +5,14 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 public class SearchRequestDto {
 
     private String q; // Search query
-    private Integer minAge;
-    private Integer maxAge;
+    private BigDecimal minAge;
+    private BigDecimal maxAge;
     private String category;
     private CourseDocument.CourseType type;
     private BigDecimal minPrice;
