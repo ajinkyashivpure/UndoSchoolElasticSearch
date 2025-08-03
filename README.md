@@ -190,16 +190,16 @@ curl "http://localhost:8080/api/search?q=math&category=Math&type=COURSE&minAge=1
 
 ### Autocomplete Suggestions
 
-**Endpoint:** `GET /api/search/suggest`
+**Endpoint:** `GET /api/search`
 
 **Parameters:**
-- `q` (string, required): Partial course title (minimum 2 characters)
+- `suggest` (string, required): Partial course title (minimum 2 characters)
 
 **Examples:**
 
 Get suggestions for "phy":
 ```bash
-curl "http://localhost:8080/api/search/suggest?q=phy"
+curl "http://localhost:8080/api/search?suggest=phy"
 ```
 
 **Response:**
